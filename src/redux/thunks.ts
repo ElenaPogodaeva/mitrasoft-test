@@ -1,5 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { getComments, getPosts } from '../utils/api';
+import { getComments, getPosts, getUser } from '../utils/api';
 
 export const fetchPosts = createAsyncThunk('post/fetchPosts', async (_, { rejectWithValue }) => {
   try {
@@ -16,6 +16,18 @@ export const fetchComments = createAsyncThunk(
     try {
       const comments = await getComments();
       return { comments };
+    } catch (err) {
+      return rejectWithValue((err as Error).message);
+    }
+  }
+);
+
+export const fetchUser = createAsyncThunk(
+  'user/fetchUser',
+  async (id: string, { rejectWithValue }) => {
+    try {
+      const user = await getUser(+id);
+      return { user };
     } catch (err) {
       return rejectWithValue((err as Error).message);
     }

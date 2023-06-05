@@ -12,3 +12,17 @@ export interface IComment {
   email: string;
   body: string;
 }
+
+export interface IUser {
+  id: number;
+  name: string;
+  email: string;
+  address: {
+    city: string;
+  };
+  phone: string;
+  website: string;
+  company: {
+    name: string;
+  };
+}
