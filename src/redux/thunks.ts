@@ -1,14 +1,31 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { getComments, getPosts, getUser } from '../utils/api';
+import { getComments, getPosts, getUser, getUserPosts } from '../utils/api';
+import { SearchPostsParams } from '../types/types';
 
-export const fetchPosts = createAsyncThunk('post/fetchPosts', async (_, { rejectWithValue }) => {
-  try {
-    const posts = await getPosts();
-    return { posts };
-  } catch (err) {
-    return rejectWithValue((err as Error).message);
+type SearchOptions = {
+  resultsPerPage: number;
+  currentPage: number;
+};
+
+export const fetchPosts = createAsyncThunk(
+  'post/fetchPosts',
+  async (searchOptions: SearchOptions, { rejectWithValue }) => {
+    const { currentPage, resultsPerPage } = searchOptions;
+
+    const params: SearchPostsParams = {
+      _title: '',
+      _page: currentPage.toString(),
+      _limit: resultsPerPage.toString(),
+    };
+
+    try {
+      const posts = await getPosts(params);
+      return { posts };
+    } catch (err) {
+      return rejectWithValue((err as Error).message);
+    }
   }
-});
+);
 
 export const fetchComments = createAsyncThunk(
   'post/fetchComments',

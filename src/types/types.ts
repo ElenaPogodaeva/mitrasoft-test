@@ -26,3 +26,9 @@ export interface IUser {
     name: string;
   };
 }
+
+export type SearchPostsParams = {
+  _title: string;
+  _page: string;
+  _limit: string;
+};

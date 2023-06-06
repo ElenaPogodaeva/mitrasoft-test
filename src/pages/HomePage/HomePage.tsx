@@ -4,14 +4,17 @@ import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import { fetchComments, fetchPosts } from '../../redux/thunks';
 
 export const HomePage = () => {
-  const { posts, isLoading } = useAppSelector((state) => state.post);
+  const { posts, isLoading, resultsPerPage, currentPage } = useAppSelector((state) => state.post);
 
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(fetchPosts());
     dispatch(fetchComments());
   }, []);
+
+  useEffect(() => {
+    dispatch(fetchPosts({ resultsPerPage, currentPage }));
+  }, [resultsPerPage, currentPage]);
 
   return <>{isLoading ? <p>...Loading </p> : <Posts posts={posts} />}</>;
 };

@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { fetchPosts } from '../thunks';
 import { IPost } from '../../types/types';
 
@@ -6,18 +6,31 @@ export type PostState = {
   isLoading: boolean;
   error: string;
   posts: IPost[];
+  resultsPerPage: number;
+  currentPage: number;
+  totalPages: number;
 };
 
 const initialState: PostState = {
   isLoading: true,
   error: '',
   posts: [],
+  resultsPerPage: 10,
+  currentPage: 1,
+  totalPages: 10,
 };
 
 export const postSlice = createSlice({
   name: 'post',
   initialState,
-  reducers: {},
+  reducers: {
+    // setSearchValue: (state, action: PayloadAction<string>) => {
+    //   state.searchValue = action.payload;
+    // },
+    setCurrentPage: (state, action: PayloadAction<number>) => {
+      state.currentPage = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(fetchPosts.pending, (state) => {
       state.isLoading = true;
@@ -35,5 +48,7 @@ export const postSlice = createSlice({
     });
   },
 });
+
+export const { setCurrentPage } = postSlice.actions;
 
 export default postSlice.reducer;
