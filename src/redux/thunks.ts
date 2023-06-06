@@ -39,6 +39,18 @@ export const fetchComments = createAsyncThunk(
   }
 );
 
+export const fetchUserPosts = createAsyncThunk(
+  'post/fetchUserPosts',
+  async (id: string, { rejectWithValue }) => {
+    try {
+      const posts = await getUserPosts(+id);
+      return { posts };
+    } catch (err) {
+      return rejectWithValue((err as Error).message);
+    }
+  }
+);
+
 export const fetchUser = createAsyncThunk(
   'user/fetchUser',
   async (id: string, { rejectWithValue }) => {

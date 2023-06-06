@@ -1,5 +1,5 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { fetchPosts } from '../thunks';
+import { fetchPosts, fetchUserPosts } from '../thunks';
 import { IPost } from '../../types/types';
 
 export type PostState = {
@@ -42,6 +42,20 @@ export const postSlice = createSlice({
       state.posts = action.payload.posts;
     });
     builder.addCase(fetchPosts.rejected, (state) => {
+      state.isLoading = false;
+      state.error = 'Error occured';
+      state.posts = [];
+    });
+    builder.addCase(fetchUserPosts.pending, (state) => {
+      state.isLoading = true;
+      state.error = '';
+    });
+    builder.addCase(fetchUserPosts.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.error = '';
+      state.posts = action.payload.posts;
+    });
+    builder.addCase(fetchUserPosts.rejected, (state) => {
       state.isLoading = false;
       state.error = 'Error occured';
       state.posts = [];
