@@ -4,7 +4,9 @@ import { setCurrentPage, setSearchValue } from '../../redux/reducers/postSlice';
 import { fetchPosts } from '../../redux/thunks';
 
 export const Search = () => {
-  const { searchValue, resultsPerPage, currentPage } = useAppSelector((state) => state.post);
+  const { searchValue, resultsPerPage, currentPage, sortOrder } = useAppSelector(
+    (state) => state.post
+  );
 
   const dispatch = useAppDispatch();
 
@@ -15,7 +17,7 @@ export const Search = () => {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
-    dispatch(fetchPosts({ searchValue, resultsPerPage, currentPage }));
+    dispatch(fetchPosts({ searchValue, resultsPerPage, currentPage, sortOrder }));
     dispatch(setCurrentPage(1));
   };
 

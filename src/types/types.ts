@@ -31,4 +31,11 @@ export type SearchPostsParams = {
   title?: string;
   _page: string;
   _limit: string;
+  _sort: string;
+  _order: SortType;
 };
+
+export enum SortType {
+  ASC = 'asc',
+  DESC = 'desc',
+}

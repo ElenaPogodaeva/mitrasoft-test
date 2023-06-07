@@ -1,6 +1,6 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { fetchPosts, fetchUserPosts } from '../thunks';
-import { IPost } from '../../types/types';
+import { IPost, SortType } from '../../types/types';
 
 export type PostState = {
   isLoading: boolean;
@@ -10,6 +10,7 @@ export type PostState = {
   resultsPerPage: number;
   currentPage: number;
   totalPages: number;
+  sortOrder: SortType;
 };
 
 const initialState: PostState = {
@@ -20,6 +21,7 @@ const initialState: PostState = {
   resultsPerPage: 10,
   currentPage: 1,
   totalPages: 10,
+  sortOrder: SortType.ASC,
 };
 
 export const postSlice = createSlice({
@@ -28,6 +30,9 @@ export const postSlice = createSlice({
   reducers: {
     setSearchValue: (state, action: PayloadAction<string>) => {
       state.searchValue = action.payload;
+    },
+    setSortOrder: (state, action: PayloadAction<string>) => {
+      state.sortOrder = action.payload as SortType;
     },
     setCurrentPage: (state, action: PayloadAction<number>) => {
       state.currentPage = action.payload;
@@ -65,6 +70,6 @@ export const postSlice = createSlice({
   },
 });
 
-export const { setCurrentPage, setSearchValue } = postSlice.actions;
+export const { setCurrentPage, setSearchValue, setSortOrder } = postSlice.actions;
 
 export default postSlice.reducer;
