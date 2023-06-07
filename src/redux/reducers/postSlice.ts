@@ -6,6 +6,7 @@ export type PostState = {
   isLoading: boolean;
   error: string;
   posts: IPost[];
+  searchValue: string;
   resultsPerPage: number;
   currentPage: number;
   totalPages: number;
@@ -15,6 +16,7 @@ const initialState: PostState = {
   isLoading: true,
   error: '',
   posts: [],
+  searchValue: '',
   resultsPerPage: 10,
   currentPage: 1,
   totalPages: 10,
@@ -24,9 +26,9 @@ export const postSlice = createSlice({
   name: 'post',
   initialState,
   reducers: {
-    // setSearchValue: (state, action: PayloadAction<string>) => {
-    //   state.searchValue = action.payload;
-    // },
+    setSearchValue: (state, action: PayloadAction<string>) => {
+      state.searchValue = action.payload;
+    },
     setCurrentPage: (state, action: PayloadAction<number>) => {
       state.currentPage = action.payload;
     },
@@ -63,6 +65,6 @@ export const postSlice = createSlice({
   },
 });
 
-export const { setCurrentPage } = postSlice.actions;
+export const { setCurrentPage, setSearchValue } = postSlice.actions;
 
 export default postSlice.reducer;

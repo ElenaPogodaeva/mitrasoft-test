@@ -3,6 +3,7 @@ import { getComments, getPosts, getUser, getUserPosts } from '../utils/api';
 import { SearchPostsParams } from '../types/types';
 
 type SearchOptions = {
+  searchValue: string;
   resultsPerPage: number;
   currentPage: number;
 };
@@ -10,13 +11,16 @@ type SearchOptions = {
 export const fetchPosts = createAsyncThunk(
   'post/fetchPosts',
   async (searchOptions: SearchOptions, { rejectWithValue }) => {
-    const { currentPage, resultsPerPage } = searchOptions;
+    const { searchValue, currentPage, resultsPerPage } = searchOptions;
 
     const params: SearchPostsParams = {
-      _title: '',
       _page: currentPage.toString(),
       _limit: resultsPerPage.toString(),
     };
+
+    if (searchValue) {
+      params.title = searchValue;
+    }
 
     try {
       const posts = await getPosts(params);

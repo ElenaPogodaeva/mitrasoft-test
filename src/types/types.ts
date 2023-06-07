@@ -28,7 +28,7 @@ export interface IUser {
 }
 
 export type SearchPostsParams = {
-  _title: string;
+  title?: string;
   _page: string;
   _limit: string;
 };
