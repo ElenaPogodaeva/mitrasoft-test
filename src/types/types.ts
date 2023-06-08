@@ -39,3 +39,10 @@ export enum SortType {
   ASC = 'asc',
   DESC = 'desc',
 }
+
+export type SearchOptions = {
+  searchValue: string;
+  resultsPerPage: number;
+  currentPage: number;
+  sortOrder: SortType;
+};

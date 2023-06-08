@@ -8,7 +8,7 @@ async function createResponse(url: string, method: string, params?: SearchPostsP
       headers: {},
     };
     const newUrl = new URL(url);
-    console.log(newUrl);
+
     if (params) {
       newUrl.search = new URLSearchParams(params).toString();
     }
@@ -26,7 +26,7 @@ async function createResponse(url: string, method: string, params?: SearchPostsP
   }
 }
 
-export const getPosts = async (params: SearchPostsParams) => {
+export const getPosts = (params: SearchPostsParams) => {
   const url = `${baseUrl}/posts`;
   return createResponse(url, 'GET', params);
 };
