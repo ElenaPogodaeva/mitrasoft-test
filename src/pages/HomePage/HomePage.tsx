@@ -1,9 +1,10 @@
 import { useEffect } from 'react';
 import Posts from '../../components/Posts/Posts';
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
-import { fetchComments, fetchPosts } from '../../redux/thunks';
 import Search from '../../components/Search/Search';
 import Sort from '../../components/Sort/Sort';
+import { fetchPosts } from '../../redux/reducers/postSlice';
+import { fetchComments } from '../../redux/reducers/commentSlice';
 
 export const HomePage = () => {
   const { posts, isLoading, searchValue, resultsPerPage, currentPage, sortOrder } = useAppSelector(

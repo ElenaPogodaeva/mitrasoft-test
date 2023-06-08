@@ -1,7 +1,6 @@
 import { Button, Form, InputGroup } from 'react-bootstrap';
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
-import { setCurrentPage, setSearchValue } from '../../redux/reducers/postSlice';
-import { fetchPosts } from '../../redux/thunks';
+import { fetchPosts, setCurrentPage, setSearchValue } from '../../redux/reducers/postSlice';
 
 export const Search = () => {
   const { searchValue, resultsPerPage, currentPage, sortOrder } = useAppSelector(

@@ -1,5 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
-import { fetchComments } from '../thunks';
+import { PayloadAction, createAction, createSlice } from '@reduxjs/toolkit';
 import { IComment } from '../../types/types';
 
 export type CommentState = {
@@ -17,23 +16,28 @@ const initialState: CommentState = {
 export const commentSlice = createSlice({
   name: 'comment',
   initialState,
-  reducers: {},
-  extraReducers: (builder) => {
-    builder.addCase(fetchComments.pending, (state) => {
+  reducers: {
+    fetchCommentsPending: (state) => {
       state.isLoading = true;
       state.error = '';
-    });
-    builder.addCase(fetchComments.fulfilled, (state, action) => {
+    },
+    fetchCommentsSuccess: (state, action: PayloadAction<IComment[]>) => {
       state.isLoading = false;
       state.error = '';
-      state.comments = action.payload.comments;
-    });
-    builder.addCase(fetchComments.rejected, (state) => {
+      state.comments = action.payload;
+    },
+    fetchCommentsError: (state) => {
       state.isLoading = false;
       state.error = 'Error occured';
       state.comments = [];
-    });
+    },
   },
 });
+
+export const { fetchCommentsPending, fetchCommentsSuccess, fetchCommentsError } =
+  commentSlice.actions;
+
+export const FETCH_COMMENTS = 'comments/fetchComments';
+export const fetchComments = createAction(FETCH_COMMENTS);
 
 export default commentSlice.reducer;

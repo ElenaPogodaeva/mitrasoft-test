@@ -1,6 +1,5 @@
-import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { fetchPosts, fetchUserPosts } from '../thunks';
-import { IPost, SortType } from '../../types/types';
+import { PayloadAction, createAction, createSlice } from '@reduxjs/toolkit';
+import { IPost, SearchOptions, SortType } from '../../types/types';
 
 export type PostState = {
   isLoading: boolean;
@@ -28,6 +27,34 @@ export const postSlice = createSlice({
   name: 'post',
   initialState,
   reducers: {
+    fetchPostsPending: (state) => {
+      state.isLoading = true;
+      state.error = '';
+    },
+    fetchPostsSuccess: (state, action: PayloadAction<IPost[]>) => {
+      state.isLoading = false;
+      state.error = '';
+      state.posts = action.payload;
+    },
+    fetchPostsError: (state) => {
+      state.isLoading = false;
+      state.error = 'Error occured';
+      state.posts = [];
+    },
+    fetchUserPostsPending: (state) => {
+      state.isLoading = true;
+      state.error = '';
+    },
+    fetchUserPostsSuccess: (state, action: PayloadAction<IPost[]>) => {
+      state.isLoading = false;
+      state.error = '';
+      state.posts = action.payload;
+    },
+    fetchUserPostsError: (state) => {
+      state.isLoading = false;
+      state.error = 'Error occured';
+      state.posts = [];
+    },
     setSearchValue: (state, action: PayloadAction<string>) => {
       state.searchValue = action.payload;
     },
@@ -38,38 +65,24 @@ export const postSlice = createSlice({
       state.currentPage = action.payload;
     },
   },
-  extraReducers: (builder) => {
-    builder.addCase(fetchPosts.pending, (state) => {
-      state.isLoading = true;
-      state.error = '';
-    });
-    builder.addCase(fetchPosts.fulfilled, (state, action) => {
-      state.isLoading = false;
-      state.error = '';
-      state.posts = action.payload.posts;
-    });
-    builder.addCase(fetchPosts.rejected, (state) => {
-      state.isLoading = false;
-      state.error = 'Error occured';
-      state.posts = [];
-    });
-    builder.addCase(fetchUserPosts.pending, (state) => {
-      state.isLoading = true;
-      state.error = '';
-    });
-    builder.addCase(fetchUserPosts.fulfilled, (state, action) => {
-      state.isLoading = false;
-      state.error = '';
-      state.posts = action.payload.posts;
-    });
-    builder.addCase(fetchUserPosts.rejected, (state) => {
-      state.isLoading = false;
-      state.error = 'Error occured';
-      state.posts = [];
-    });
-  },
 });
 
-export const { setCurrentPage, setSearchValue, setSortOrder } = postSlice.actions;
+export const {
+  fetchPostsPending,
+  fetchPostsSuccess,
+  fetchPostsError,
+  fetchUserPostsPending,
+  fetchUserPostsSuccess,
+  fetchUserPostsError,
+  setCurrentPage,
+  setSearchValue,
+  setSortOrder,
+} = postSlice.actions;
+
+export const FETCH_POSTS = 'posts/fetchPosts';
+export const fetchPosts = createAction<SearchOptions>(FETCH_POSTS);
+
+export const FETCH_USER_POSTS = 'posts/fetchUserPosts';
+export const fetchUserPosts = createAction<number>(FETCH_USER_POSTS);
 
 export default postSlice.reducer;
