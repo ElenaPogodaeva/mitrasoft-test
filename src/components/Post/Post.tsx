@@ -24,13 +24,13 @@ export const Post = ({ post, handleClick }: PostProps) => {
       <Card>
         <Card.Body className="card">
           <Card.Title className="card-title">{title}</Card.Title>
-          <Card.Text className="card-text">{body}</Card.Text>
+          <Card.Text className="card-text mb-2">{body}</Card.Text>
           <Link to={`/users/${userId}`}>
             <Image src={avatar} roundedCircle width={50} height={75} />
           </Link>
         </Card.Body>
         <Card.Footer className="text-muted">
-          <Button variant="primary" onClick={handleBtnClick}>
+          <Button variant="primary" onClick={handleBtnClick} size="sm">
             Комментарии
           </Button>
           {isCommentOpen && <Comments postId={id} />}

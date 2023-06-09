@@ -9,7 +9,7 @@ export const Comment = ({ comment }: CommentProps) => {
   const { email, body } = comment;
 
   return (
-    <ListGroup.Item className="p-0 pt-3">
+    <ListGroup.Item className="p-0 pt-3 bg-light">
       <p className="text-muted mb-2">{email}</p>
       <p>{body}</p>
     </ListGroup.Item>
