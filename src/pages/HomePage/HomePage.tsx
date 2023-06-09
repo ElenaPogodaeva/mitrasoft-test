@@ -5,6 +5,7 @@ import Search from '../../components/Search/Search';
 import Sort from '../../components/Sort/Sort';
 import { fetchPosts } from '../../redux/reducers/postSlice';
 import { fetchComments } from '../../redux/reducers/commentSlice';
+import Pages from '../../components/Pages/Pages';
 
 export const HomePage = () => {
   const { posts, isLoading, searchValue, resultsPerPage, currentPage, sortOrder } = useAppSelector(
@@ -27,7 +28,14 @@ export const HomePage = () => {
         <Search />
         <Sort />
       </div>
-      {isLoading ? <p>...Loading </p> : <Posts posts={posts} />}
+      {isLoading ? (
+        <p>...Loading </p>
+      ) : (
+        <>
+          <Posts posts={posts} />
+          <Pages />
+        </>
+      )}
     </>
   );
 };
