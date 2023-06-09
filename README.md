@@ -1,7 +1,5 @@
 # Mitrasoft test
 
-### [Demo](https://elenapogodaeva.github.io/mitrasoft-test/)
-
 ### Technologies
 
 React, Typescript, Redux toolkit, Redux saga, ESLint.
