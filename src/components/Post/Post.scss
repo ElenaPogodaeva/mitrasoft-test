@@ -1,16 +1,23 @@
-.card {
-  min-height: 300px;
+.card-body {
   overflow: hidden;
 }
+
 .card-text {
   -webkit-box-orient: vertical;
   display: -webkit-box;
-  -webkit-line-clamp: 7;
+  -webkit-line-clamp: 6;
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
 .card-title {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+@media(min-width: 768px) {
+  .card-body {
+    height: 350px;
+  }
 }

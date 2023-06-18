@@ -8,3 +8,9 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+.spinner {
+  position: fixed;
+  top: calc(50% - 40px);
+  left: calc(50% - 40px);
+}

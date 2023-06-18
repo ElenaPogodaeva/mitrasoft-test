@@ -1,8 +1,10 @@
-# Mitrasoft test
+# Posts app
+
+### [Demo](https://elenapogodaeva.github.io/mitrasoft-test/)
 
 ### Technologies
 
-React, Typescript, Redux toolkit, Redux saga, ESLint.
+React, Typescript, React-bootstrap, React-router, Redux toolkit, Redux saga, ESLint.
 
 ### Setup and Running
 

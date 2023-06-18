@@ -5,6 +5,7 @@ import Posts from '../../components/Posts/Posts';
 import UserCard from '../../components/UserCard/UserCard';
 import { fetchUserPosts } from '../../redux/reducers/postSlice';
 import { fetchUser } from '../../redux/reducers/userSlice';
+import { Spinner } from 'react-bootstrap';
 
 export const UserPage = () => {
   const { user } = useAppSelector((state) => state.user);
@@ -21,7 +22,7 @@ export const UserPage = () => {
   return (
     <>
       {isLoading ? (
-        <p>...Loading </p>
+        <Spinner animation="border" variant="primary" className="spinner" />
       ) : (
         <>
           <UserCard user={user}></UserCard>

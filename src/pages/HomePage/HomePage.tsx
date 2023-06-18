@@ -6,6 +6,7 @@ import Sort from '../../components/Sort/Sort';
 import { fetchPosts } from '../../redux/reducers/postSlice';
 import { fetchComments } from '../../redux/reducers/commentSlice';
 import Pages from '../../components/Pages/Pages';
+import { Spinner } from 'react-bootstrap';
 
 export const HomePage = () => {
   const { posts, isLoading, searchValue, resultsPerPage, currentPage, sortOrder } = useAppSelector(
@@ -29,7 +30,7 @@ export const HomePage = () => {
         <Sort />
       </div>
       {isLoading ? (
-        <p>...Loading </p>
+        <Spinner animation="border" variant="primary" className="spinner" />
       ) : (
         <>
           <Posts posts={posts} />

@@ -5,3 +5,24 @@
   text-decoration: none;
   color: inherit;
 }
+
+.menu-link {
+  display: block;
+  padding: 0.5rem 0;
+  color: #000000a6;
+  text-decoration: none;
+  background: none;
+  border: 0;
+  transition: .3s; 
+}
+
+.menu-link:hover {
+  color: #000000cc;
+}
+
+@media(min-width: 992px) {
+  .menu-link {
+    padding-right: 0.5rem;
+    padding-left: 0.5rem;
+  }
+}

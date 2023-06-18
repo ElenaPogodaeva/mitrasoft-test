@@ -21,8 +21,8 @@ export const Post = ({ post, handleClick }: PostProps) => {
 
   return (
     <Col>
-      <Card>
-        <Card.Body className="card">
+      <Card className="card">
+        <Card.Body className="card-body">
           <Card.Title className="card-title">{title}</Card.Title>
           <Card.Text className="card-text mb-2">{body}</Card.Text>
           <Link to={`/users/${userId}`}>
@@ -30,7 +30,7 @@ export const Post = ({ post, handleClick }: PostProps) => {
           </Link>
         </Card.Body>
         <Card.Footer className="text-muted">
-          <Button variant="primary" onClick={handleBtnClick} size="sm">
+          <Button variant="outline-info" onClick={handleBtnClick} size="sm">
             Комментарии
           </Button>
           {isCommentOpen && <Comments postId={id} />}
